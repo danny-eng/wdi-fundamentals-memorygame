@@ -23,31 +23,56 @@ var cards = [
 },
 ];
 var cardsInPlay = [];
+var score = 0;
 
+// Create score button.
+document.getElementById("score-tracker").innerHTML = `Score: ${score}`;
+
+// Make board -> flip -> check -> update score -> repeat
+var resetBoard = function (){
+  for (i = 0; i < cards.length; i++){
+      var deleteList = document.getElementById("game-board");
+      deleteList.removeChild(deleteList.childNodes[0]);
+  }
+  createBoard();
+  resetButton();
+  console.log("6");
+};
+
+var resetButton = function (){
+  var buttonHere = document.getElementById("reset");
+  buttonHere.addEventListener("click", resetBoard);
+  cardsInPlay = [];
+  console.log("5");
+};
+
+var updateScore = function (){
+  score++;
+  document.getElementById("score-tracker").innerHTML = `Score: ${score}`;
+  console.log("Updating!");
+  console.log("4");
+};
+
+//when two cards are flipped, update score and call for reset.
 var checkForMatch = function (){
-
 	if (cardsInPlay.length === 2){
 		if (cardsInPlay[0] === cardsInPlay[1]){
-			alert("You found a match!");
-		} else {
-			alert("Sorry, try again.");
+      updateScore();
+      console.log("3");
 		}
 	}
-
 };
 
+// when a card is selected, its art flips.
 var flipCard = function (){
-
 	var cardId = this.getAttribute('data-id');
-	console.log("User flipped " + cards[cardId].rank);
 	cardsInPlay.push(cards[cardId].rank);
-	console.log(cards[cardId].cardImage);
-	console.log(cards[cardId].suit);
 	this.setAttribute("src", cards[cardId].cardImage);
 	checkForMatch();
-
+  console.log("2");
 };
 
+// populate game-board with card backs.
 var createBoard = function (){
 	for (i = 0; i < cards.length; i++) {
 		var cardElement = document.createElement("img");
@@ -55,7 +80,9 @@ var createBoard = function (){
 		cardElement.setAttribute("data-id", i);
 		cardElement.addEventListener("click", flipCard);
 		document.getElementById("game-board").appendChild(cardElement);
+    console.log("1");
 	}
 };
 
 createBoard();
+resetButton();
