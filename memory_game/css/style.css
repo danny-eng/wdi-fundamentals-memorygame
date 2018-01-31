@@ -4,6 +4,7 @@ body {
 	text-transform: uppercase;
 	margin: 0;
 }
+
 header {
 	background-color: #F15B31;
 	color: #FFFFFF;
@@ -11,7 +12,7 @@ header {
 }
 h1 {
 	font-family: Raleway;
-	
+
 	letter-spacing: 1px;
 	font-weight: 400;
 	font-size: 45px;
@@ -83,4 +84,7 @@ footer {
 .name {
 	color: #F15B31;
 	font-weight: 700;
+}
+.card:hover {
+  transform: scale(1.05);
 }
